@@ -9,22 +9,17 @@ const app = express();
 app.use(express.json()); // Parse JSON request bodies
 app.use(cors()); // Enable CORS (Cross-Origin Resource Sharing)
 
+// Connect to MongoDB (replace 'your-database-uri' with your MongoDB connection URI)
+mongoose.connect("mongodb+srv://jagdtri2003:zsL5bsh1uWIqu6Hx@cluster0.tcqpxnn.mongodb.net/Fotogram?retryWrites=true&w=majority", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const db = mongoose.connection;
 
-const connectToDB = async () =>{
-  // Connect to MongoDB (replace 'your-database-uri' with your MongoDB connection URI)
-  await mongoose.connect("mongodb+srv://jagdtri2003:zsL5bsh1uWIqu6Hx@cluster0.tcqpxnn.mongodb.net/Fotogram?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  const db = mongoose.connection;
-
-  db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-  db.once('open', () => {
-    console.log('Connected to MongoDB database');
-  });
-}
-
-connectToDB();
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB database');
+});
 
 // Define routes
 app.use('/api', require('./routes/api')); // Example user routes
