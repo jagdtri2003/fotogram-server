@@ -21,6 +21,12 @@ db.once('open', () => {
   console.log('Connected to MongoDB database');
 });
 
+// Start the server
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
 // Define routes
 app.use('/api', require('./routes/api')); // Example user routes
 
@@ -30,8 +36,4 @@ app.get('/',(req,res)=>{
 
 
 
-// Start the server
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+
