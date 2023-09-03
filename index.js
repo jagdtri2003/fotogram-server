@@ -31,7 +31,7 @@ app.listen(port, () => {
 app.use('/api', require('./routes/api')); // Example user routes
 
 app.get('/',(req,res)=>{
-    res.send("Hello World");
+    res.send("Working !!");
 })
 
 
